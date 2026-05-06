@@ -99,6 +99,6 @@ class AlgorithmBrowser(QWidget):
     def make_browser(package, label):
         ciphers = discover_modules(package, attr_name="Cipher")
 
-        entries = [(c.name, c) for c in ciphers]
+        entries = sorted([(c.name, c) for c in ciphers], key=lambda c: c[0])
 
         return AlgorithmBrowser(entries, listbox_label=label)

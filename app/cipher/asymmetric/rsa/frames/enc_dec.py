@@ -47,7 +47,7 @@ class EncryptDecryptTab(ContentTab):
                 "text": "Encrypt",
                 "command": self._do_encrypt,
             },
-            {"kind": "label", "row": 3, "col": 0, "text": "Ciphertext (hex):"},
+            {"kind": "label", "row": 3, "col": 0, "text": "Ciphertext:"},
             {
                 "kind": "text",
                 "row": 3,
@@ -77,7 +77,7 @@ class EncryptDecryptTab(ContentTab):
                 "target": self,
                 "attr": "dec_pass",
             },
-            {"kind": "label", "row": 2, "col": 0, "text": "Ciphertext (hex):"},
+            {"kind": "label", "row": 2, "col": 0, "text": "Ciphertext:"},
             {
                 "kind": "text",
                 "row": 2,
@@ -107,7 +107,7 @@ class EncryptDecryptTab(ContentTab):
         ]
 
         FormBuilder.build_multi_sections(
-            self, [("Encrypt", enc_config), ("Decrypt", dec_config)]
+            self, [("Encryption", enc_config), ("Decryption", dec_config)]
         )
 
     def _do_encrypt(self):
@@ -116,7 +116,9 @@ class EncryptDecryptTab(ContentTab):
             plain = self.enc_plain.toPlainText()
             ct = alg.encrypt(pub_pem, plain)
 
-            getattr(self, "enc_ct_widget").setPlainText(encode_bytes_to_string(ct))
+            ct_encoded = encode_bytes_to_string(ct)
+            getattr(self, "enc_ct_widget").setPlainText(ct_encoded)
+            self.dec_ct.setPlainText(ct_encoded)
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Encryption failed: {e}")

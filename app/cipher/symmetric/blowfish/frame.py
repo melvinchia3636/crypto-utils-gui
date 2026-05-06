@@ -50,7 +50,7 @@ class Frame(QWidget):
                 "text": "Encrypt",
                 "command": self._do_encrypt,
             },
-            {"kind": "label", "row": 3, "col": 0, "text": "Derived key (hex):"},
+            {"kind": "label", "row": 3, "col": 0, "text": "Derived key:"},
             {
                 "kind": "entry",
                 "row": 3,
@@ -60,7 +60,7 @@ class Frame(QWidget):
                 "attr": "enc_derived_key",
                 "readonly": True,
             },
-            {"kind": "label", "row": 4, "col": 0, "text": "IV (hex):"},
+            {"kind": "label", "row": 4, "col": 0, "text": "IV:"},
             {
                 "kind": "entry",
                 "row": 4,
@@ -70,7 +70,7 @@ class Frame(QWidget):
                 "attr": "enc_iv",
                 "readonly": True,
             },
-            {"kind": "label", "row": 5, "col": 0, "text": "Ciphertext (hex):"},
+            {"kind": "label", "row": 5, "col": 0, "text": "Ciphertext:"},
             {
                 "kind": "entry",
                 "row": 5,
@@ -106,7 +106,7 @@ class Frame(QWidget):
                 "target": self,
                 "attr": "dec_combined",
             },
-            {"kind": "label", "row": 1, "col": 0, "text": "IV (hex):"},
+            {"kind": "label", "row": 1, "col": 0, "text": "IV:"},
             {
                 "kind": "entry",
                 "row": 1,
@@ -116,7 +116,7 @@ class Frame(QWidget):
                 "attr": "dec_iv",
                 "readonly": True,
             },
-            {"kind": "label", "row": 2, "col": 0, "text": "Ciphertext (hex):"},
+            {"kind": "label", "row": 2, "col": 0, "text": "Ciphertext:"},
             {
                 "kind": "text",
                 "row": 2,

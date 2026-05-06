@@ -1,5 +1,7 @@
 from PyQt5.QtWidgets import QMessageBox, QVBoxLayout, QWidget
 
+from app.encoding import decode_string_to_bytes, encode_bytes_to_string
+
 from ....forms import FormBuilder
 from ....helpers.key_derivation import DEFAULT_PASSPHRASE, DEFAULT_PLAINTEXT, derive_key
 from . import alg
@@ -45,7 +47,7 @@ class Frame(QWidget):
                 "text": "Encrypt",
                 "command": self._do_encrypt,
             },
-            {"kind": "label", "row": 3, "col": 0, "text": "Derived key (hex):"},
+            {"kind": "label", "row": 3, "col": 0, "text": "Derived key:"},
             {
                 "kind": "entry",
                 "row": 3,
@@ -55,7 +57,7 @@ class Frame(QWidget):
                 "attr": "enc_derived_key",
                 "readonly": True,
             },
-            {"kind": "label", "row": 4, "col": 0, "text": "Ciphertext (hex):"},
+            {"kind": "label", "row": 4, "col": 0, "text": "Ciphertext:"},
             {
                 "kind": "text",
                 "row": 4,
@@ -76,7 +78,7 @@ class Frame(QWidget):
                 "target": self,
                 "attr": "dec_pass",
             },
-            {"kind": "label", "row": 1, "col": 0, "text": "Ciphertext (hex):"},
+            {"kind": "label", "row": 1, "col": 0, "text": "Ciphertext:"},
             {
                 "kind": "text",
                 "row": 1,
@@ -112,10 +114,13 @@ class Frame(QWidget):
         try:
             key = derive_key(self.enc_pass.text(), 16)
             plain = self.enc_plain.toPlainText()
+
             ct_hex = alg.encrypt(key, plain)
+            ct_display = encode_bytes_to_string(bytes.fromhex(ct_hex))
+
             self.enc_derived_key.setText(key.hex())
-            self.enc_ct.setPlainText(ct_hex)
-            self.dec_ct.setPlainText(ct_hex)
+            self.enc_ct.setPlainText(ct_display)
+            self.dec_ct.setPlainText(ct_display)
             self.dec_pass.setText(self.enc_pass.text())
 
         except Exception as e:
@@ -124,7 +129,11 @@ class Frame(QWidget):
     def _do_decrypt(self):
         try:
             key = derive_key(self.dec_pass.text(), 16)
-            ct_hex = self.dec_ct.toPlainText().strip()
+
+            ct_raw = self.dec_ct.toPlainText().strip()
+            ct_bytes = decode_string_to_bytes(ct_raw)
+            ct_hex = ct_bytes.hex()
+
             pt = alg.decrypt(key, ct_hex)
             self.dec_result.setText(pt)
 

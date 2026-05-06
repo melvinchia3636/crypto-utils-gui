@@ -72,7 +72,7 @@ class AgreementTab(ContentTab):
                 "attr": "compute_status",
                 "readonly": True,
             },
-            {"kind": "label", "row": 2, "col": 0, "text": "Raw shared secret (hex):"},
+            {"kind": "label", "row": 2, "col": 0, "text": "Raw shared secret:"},
             {
                 "kind": "text",
                 "row": 2,
@@ -82,7 +82,7 @@ class AgreementTab(ContentTab):
                 "attr": "raw_secret",
                 "readonly": True,
             },
-            {"kind": "label", "row": 3, "col": 0, "text": "HKDF-derived (hex):"},
+            {"kind": "label", "row": 3, "col": 0, "text": "HKDF-derived:"},
             {
                 "kind": "text",
                 "row": 3,

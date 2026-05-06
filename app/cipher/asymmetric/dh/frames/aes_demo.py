@@ -38,7 +38,7 @@ class AesGcmDemoTab(ContentTab):
                 "target": self,
                 "attr": "alice_enc_peer",
             },
-            {"kind": "label", "row": 3, "col": 0, "text": "Derived shared key (hex):"},
+            {"kind": "label", "row": 3, "col": 0, "text": "Derived shared key:"},
             {
                 "kind": "text",
                 "row": 3,
@@ -103,7 +103,7 @@ class AesGcmDemoTab(ContentTab):
                 "target": self,
                 "attr": "bob_dec_peer",
             },
-            {"kind": "label", "row": 3, "col": 0, "text": "Derived shared key (hex):"},
+            {"kind": "label", "row": 3, "col": 0, "text": "Derived shared key:"},
             {
                 "kind": "text",
                 "row": 3,
@@ -137,7 +137,7 @@ class AesGcmDemoTab(ContentTab):
             },
             {"kind": "label", "row": 6, "col": 0, "text": "Decrypted:"},
             {
-                "kind": "entry",
+                "kind": "text",
                 "row": 6,
                 "col": 1,
                 "colspan": 2,
@@ -148,7 +148,7 @@ class AesGcmDemoTab(ContentTab):
         ]
 
         FormBuilder.build_multi_sections(
-            self, [("Alice Encrypts", alice_side), ("Bob Decrypts", bob_side)]
+            self, [("Encryption (Alice)", alice_side), ("Decryption (Bob)", bob_side)]
         )
 
     def _do_encrypt(self):

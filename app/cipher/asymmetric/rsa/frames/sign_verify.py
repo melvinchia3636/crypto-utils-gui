@@ -56,7 +56,7 @@ class SignVerifyTab(ContentTab):
                 "text": "Sign",
                 "command": self._do_sign,
             },
-            {"kind": "label", "row": 4, "col": 0, "text": "Signature (hex):"},
+            {"kind": "label", "row": 4, "col": 0, "text": "Signature:"},
             {
                 "kind": "text",
                 "row": 4,
@@ -86,7 +86,7 @@ class SignVerifyTab(ContentTab):
                 "target": self,
                 "attr": "verify_msg",
             },
-            {"kind": "label", "row": 2, "col": 0, "text": "Signature (hex):"},
+            {"kind": "label", "row": 2, "col": 0, "text": "Signature:"},
             {
                 "kind": "text",
                 "row": 2,
@@ -116,7 +116,7 @@ class SignVerifyTab(ContentTab):
         ]
 
         FormBuilder.build_multi_sections(
-            self, [("Sign", sign_config), ("Verify", verify_config)]
+            self, [("Signing", sign_config), ("Verification", verify_config)]
         )
 
     def _do_sign(self):
@@ -135,7 +135,7 @@ class SignVerifyTab(ContentTab):
         try:
             pub_pem = self.verify_pubkey.toPlainText().strip()
             msg = self.verify_msg.toPlainText()
-            sig = decode_string_to_bytes(self.verify_sig.toPlainText()())
+            sig = decode_string_to_bytes(self.verify_sig.toPlainText())
             ok = alg.verify(pub_pem, msg, sig)
 
             self.verify_result.setText(

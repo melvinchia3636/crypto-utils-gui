@@ -28,5 +28,6 @@ class App(QWidget):
             for (pkg, lbl) in TABS
         ]
 
-        layout.addWidget(EncodingSelector())
+        self.encoding_selector = EncodingSelector()
+        layout.addWidget(self.encoding_selector)
         layout.addWidget(tabs)
