@@ -175,10 +175,14 @@ All core cryptographic functions have been completed. The application is fully f
 
 This project would not be possible without them:
 
-- **My Brain** for staying curious at all time and diving deep through all the theoretical side of stuff, getting a decent understanding of each algo.
+- **My Brain** for staying curious at all times and diving deep into all the theoretical sides of stuff, getting a decent understanding of each algorithm.
 - **[Deepseek](https://deepseek.com)** via OpenCode - **Assisted** with implementation of cryptographic primitives and UI components
-- **[Dr. Poornima Mahadevappa](https://www.linkedin.com/in/poornima-mahadevappa-bb325244/)** - My lecturer for the module for giving me the courage and motivation to explore the field of cryptography.
+- **[Dr. Poornima Mahadevappa](https://www.linkedin.com/in/poornima-mahadevappa-bb325244/)** - My lecturer for the module, for giving me the courage and motivation to explore the field of cryptography.
 
 ## 📄 License
 
 This project is licensed under the MIT License.
+
+---
+
+♄🜃☿🜃♃♃☿🜃♃☿🜁🜂♇♃🜂🜃♃♄♄♄🜁🜂♃🜁♇🜂♆♇♄🜃♃♆§♆♇♄🜂☿♄🜂🜃♆☿🜃🜂♄🜃♃♄♃♆🜃♄♃🜁🜃🜁♆☿♃🜂🜃🜂🜁🜂♄🜃🜁☿♃🜂♆☿🜂☿🜂§🜁🜂♇♇☿♇☿♃♃🜁🜂♃🜃♄🜁♄🜃🜁♄♄☿♇♆♇🜂♇♃🜃🜃♄♃♄♄☿♄🜂🜂🜁☿♃🜃🜃☿🜁♃♆☿♄🜁🜁🜁☿🜃🜁🜃🜁♄♄🜃♃☿♃♃☿♃♄♃☿♇🜂♄🜂🜃♆♃☿♃🜃🜃🜃♄♆🜃♃🜃🜂♄🜁♃🜂🜁♃♄☿♇🜁♆♄♄♃♆☿♇☿🜂🜁♄🜂☿♇🜃♇🜁☿♃
