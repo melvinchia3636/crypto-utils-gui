@@ -1,6 +1,6 @@
-from PyQt5.QtWidgets import QApplication, QTabWidget, QWidget, QVBoxLayout
-from app.symmetric.symmetric_frame import SymmetricWidget
-from app.asymmetric.asymmetric_frame import AsymmetricWidget
+from PyQt5.QtWidgets import QApplication, QTabWidget, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QComboBox
+from .lib.symmetric.symmetric_frame import SymmetricWidget
+from .lib.asymmetric.asymmetric_frame import AsymmetricWidget
 import sys
 
 
@@ -11,6 +11,13 @@ class App(QWidget):
         self.resize(1000, 700)
 
         layout = QVBoxLayout(self)
+        top_bar = QHBoxLayout()
+        top_bar.addWidget(QLabel("Encoding:"))
+        self.encoding_combo = QComboBox()
+        self.encoding_combo.addItems(["hex", "base64", "base32", "base16"])
+        self.encoding_combo.setCurrentText("hex")
+        top_bar.addWidget(self.encoding_combo, 1)
+        layout.addLayout(top_bar)
         tabs = QTabWidget()
         tabs.addTab(SymmetricWidget(), "Symmetric")
         tabs.addTab(AsymmetricWidget(), "Asymmetric")
