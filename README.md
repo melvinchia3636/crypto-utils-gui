@@ -163,7 +163,9 @@ This project uses a **dynamic module discovery** pattern:
 | Group | Encodings |
 |-------|-----------|
 | **Standard** | Hex, Base64, Base32, Base58, Base16 |
-| **Fun** | Emoji, Bars, Braille, Runes, Math Symbols, Mahjong Tiles, Alchemy Symbols, Binary, Octal, Morse Code |
+| **Fun** | Emoji, Bars, Braille, Runes, Math Symbols, Mahjong Tiles, Alchemy Symbols, Binary, Octal, Morse Code, Base 128 |
+
+Feel free to add more.
 
 ## 📈 Status
 
