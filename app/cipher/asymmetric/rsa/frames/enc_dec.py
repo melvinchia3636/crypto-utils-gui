@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QMessageBox
 from .....helpers.key_derivation import DEFAULT_PLAINTEXT
-from .....helpers.content_tab import ContentTab
-from .....helpers.form_builder import FormBuilder
+from .....base.content_tab import ContentTab
+from .....forms import FormBuilder
 from app.encoding import (
     encode_bytes_to_string,
     decode_string_to_bytes,
@@ -110,9 +110,7 @@ class EncryptDecryptTab(ContentTab):
             pub_pem = self.enc_pubkey.toPlainText().strip()
             plain = self.enc_plain.toPlainText()
             ct = alg.encrypt(pub_pem, plain)
-            getattr(self, "enc_ct_widget").setPlainText(
-                encode_bytes_to_string(ct)
-            )
+            getattr(self, "enc_ct_widget").setPlainText(encode_bytes_to_string(ct))
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Encryption failed: {e}")
 

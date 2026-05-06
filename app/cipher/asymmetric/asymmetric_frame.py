@@ -1,14 +1,11 @@
 from ...helpers.algorithm_browser import AlgorithmBrowser
-from . import dh, ecc, elgamal
-from . import rsa
+from ...helpers.discover_modules import discover_modules
+import sys
 
 
 class AsymmetricWidget(AlgorithmBrowser):
     def __init__(self, parent=None):
-        entries = [
-            ("RSA", rsa),
-            ("ECC", ecc),
-            ("Diffie-Hellman", dh),
-            ("ElGamal", elgamal),
-        ]
+        package = sys.modules[__package__]
+        ciphers = discover_modules(package, attr_name="Cipher")
+        entries = [(c.name, c) for c in ciphers]
         super().__init__(entries, listbox_label="Algorithm", parent=parent)

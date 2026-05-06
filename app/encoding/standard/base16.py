@@ -1,4 +1,4 @@
-from ..encoder import Encoder
+from ...base.encoder import Encoder
 from base64 import b16encode, b16decode
 
 

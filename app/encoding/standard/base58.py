@@ -1,4 +1,4 @@
-from ..encoder import Encoder
+from ...base.encoder import Encoder
 
 _BASE58 = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
 

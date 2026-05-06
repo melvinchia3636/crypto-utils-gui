@@ -36,7 +36,7 @@ class AlgorithmBrowser(QWidget):
         splitter.addWidget(left)
 
         self.stack = QStackedWidget()
-        for _, mod in entries:
+        for _, entry in entries:
             scroll = QScrollArea()
             scroll.setWidgetResizable(True)
             scroll.setFrameShape(QScrollArea.NoFrame)
@@ -45,7 +45,11 @@ class AlgorithmBrowser(QWidget):
             pal.setColor(scroll.backgroundRole(), Qt.transparent)
             scroll.setPalette(pal)
             scroll.viewport().setPalette(pal)
-            scroll.setWidget(mod.frame.Frame())
+            if hasattr(entry, "frame_class"):
+                frame = entry.frame_class()
+            else:
+                frame = entry.frame.Frame()
+            scroll.setWidget(frame)
             self.stack.addWidget(scroll)
 
         splitter.addWidget(self.stack)

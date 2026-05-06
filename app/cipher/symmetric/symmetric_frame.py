@@ -1,18 +1,11 @@
 from ...helpers.algorithm_browser import AlgorithmBrowser
-from . import aes, aes_file, blowfish, consolidated, des, des3, rc4
-from . import twofish
+from ...helpers.discover_modules import discover_modules
+import sys
 
 
 class SymmetricWidget(AlgorithmBrowser):
     def __init__(self, parent=None):
-        entries = [
-            ("DES", des),
-            ("3DES", des3),
-            ("AES", aes),
-            ("Blowfish", blowfish),
-            ("Twofish", twofish),
-            ("RC4", rc4),
-            ("Symmetric (Consolidated)", consolidated),
-            ("AES File", aes_file),
-        ]
+        package = sys.modules[__package__]
+        ciphers = discover_modules(package, attr_name="Cipher")
+        entries = [(c.name, c) for c in ciphers]
         super().__init__(entries, listbox_label="Cipher Method", parent=parent)

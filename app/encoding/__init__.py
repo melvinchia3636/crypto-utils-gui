@@ -1,25 +1,11 @@
-import importlib
-import pkgutil
 from . import standard, fun
-from .encoder import Encoder
+from ..base.encoder import Encoder
+from ..helpers.discover_modules import discover_modules
 
 
-def _discover_encoders(package, group_name):
-    encoders = []
-    for info in pkgutil.iter_modules(package.__path__):
-        if info.name.startswith("_"):
-            continue
-        mod = importlib.import_module(f".{info.name}", package.__name__)
-        for attr_name in dir(mod):
-            attr = getattr(mod, attr_name)
-            if isinstance(attr, type) and issubclass(attr, Encoder) and attr is not Encoder:
-                inst = attr()
-                inst.group = group_name
-                encoders.append(inst)
-    return encoders
-
-
-ENCODERS = _discover_encoders(standard, "Standard") + _discover_encoders(fun, "Fun")
+ENCODERS = discover_modules(
+    standard, Encoder, init_fn=lambda i: setattr(i, "group", "Standard")
+) + discover_modules(fun, Encoder, init_fn=lambda i: setattr(i, "group", "Fun"))
 ENCODER_MAP = {e.name.lower(): e for e in ENCODERS}
 
 

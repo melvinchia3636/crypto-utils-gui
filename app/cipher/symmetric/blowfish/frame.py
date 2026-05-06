@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QMessageBox
-from ....helpers.form_builder import FormBuilder
+from ....forms import FormBuilder
 from ....helpers.key_derivation import derive_key, DEFAULT_PASSPHRASE, DEFAULT_PLAINTEXT
 from . import alg
 from app.encoding import (
@@ -14,6 +14,7 @@ class Frame(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setLayout(QVBoxLayout(self))
+        self.layout().setContentsMargins(0, 0, 0, 0)
 
         encrypt_config = [
             {"kind": "label", "row": 0, "col": 0, "text": "Passphrase:"},

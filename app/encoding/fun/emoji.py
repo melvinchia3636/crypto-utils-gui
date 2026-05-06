@@ -1,4 +1,4 @@
-from ..encoder import Encoder
+from ...base.encoder import Encoder
 
 _EMOJI_TABLE = [chr(0x1F300 + i) for i in range(256)]
 

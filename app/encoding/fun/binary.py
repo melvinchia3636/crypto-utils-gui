@@ -1,4 +1,4 @@
-from ..encoder import Encoder
+from ...base.encoder import Encoder
 
 
 class BinaryEncoder(Encoder):
@@ -9,4 +9,4 @@ class BinaryEncoder(Encoder):
 
     def decode(self, text: str) -> bytes:
         s = text.strip()
-        return bytes(int(s[i:i+8], 2) for i in range(0, len(s), 8))
+        return bytes(int(s[i : i + 8], 2) for i in range(0, len(s), 8))

@@ -1,6 +1,7 @@
 import os
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QMessageBox
-from ....helpers.form_builder import FormBuilder
+from Crypto.Random import get_random_bytes
+from ....forms import FormBuilder
 from . import alg
 
 
@@ -90,8 +91,6 @@ class Frame(QWidget):
                 if len(key) != 16:
                     raise ValueError
             else:
-                from Crypto.Random import get_random_bytes
-
                 key = get_random_bytes(16)
                 self.enc_key.setText(key.hex())
             with open(src, "rb") as f:

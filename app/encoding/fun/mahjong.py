@@ -1,4 +1,4 @@
-from ..encoder import Encoder
+from ...base.encoder import Encoder
 from .bars import _bits_chunk_encode, _bits_chunk_decode
 
 _TILES = "".join(chr(0x1F000 + i) for i in range(64))

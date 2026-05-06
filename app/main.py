@@ -9,10 +9,18 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtCore import Qt
-from .cipher.symmetric.symmetric_frame import SymmetricWidget
-from .cipher.asymmetric.asymmetric_frame import AsymmetricWidget
+from .helpers.algorithm_browser import AlgorithmBrowser
+from .helpers.discover_modules import discover_modules
+from .cipher import symmetric, asymmetric
 from .encoding import ENCODERS
 import sys
+
+
+def _make_browser(package, label):
+    ciphers = discover_modules(package, attr_name="Cipher")
+    entries = [(c.name, c) for c in ciphers]
+    return AlgorithmBrowser(entries, listbox_label=label)
+
 
 _groups = {}
 for enc in ENCODERS:
@@ -52,8 +60,8 @@ class App(QWidget):
         top_bar.addWidget(self.encoding_combo, 1)
         layout.addLayout(top_bar)
         tabs = QTabWidget()
-        tabs.addTab(SymmetricWidget(), "Symmetric")
-        tabs.addTab(AsymmetricWidget(), "Asymmetric")
+        tabs.addTab(_make_browser(symmetric, "Cipher Method"), "Symmetric")
+        tabs.addTab(_make_browser(asymmetric, "Algorithm"), "Asymmetric")
         layout.addWidget(tabs)
 
 

@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QMessageBox
-from .....helpers.content_tab import ContentTab
-from .....helpers.form_builder import FormBuilder
+from .....base.content_tab import ContentTab
+from .....forms import FormBuilder
 from .. import alg
 
 

@@ -1,4 +1,4 @@
-from ..encoder import Encoder
+from ...base.encoder import Encoder
 
 
 class OctalEncoder(Encoder):
@@ -9,4 +9,4 @@ class OctalEncoder(Encoder):
 
     def decode(self, text: str) -> bytes:
         s = text.strip()
-        return bytes(int(s[i:i+3], 8) for i in range(0, len(s), 3))
+        return bytes(int(s[i : i + 3], 8) for i in range(0, len(s), 3))

@@ -1,1 +1,4 @@
-from ...symmetric.aes_file import alg, frame
+from . import alg, frame
+from ....base.cipher_frame import CipherFrame
+
+Cipher = CipherFrame("AES File", frame.Frame)

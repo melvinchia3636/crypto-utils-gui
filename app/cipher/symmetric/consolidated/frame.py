@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QGridLayout, QMessageBox
 
 from .. import aes, blowfish, des, des3, rc4
-from ....helpers.form_builder import FormBuilder
+from ....forms import FormBuilder
 from ....helpers.key_derivation import derive_key, DEFAULT_PASSPHRASE, DEFAULT_PLAINTEXT
 from .. import twofish
 from app.encoding import (
@@ -145,9 +145,7 @@ class Frame(QWidget):
 
             tf_key = derive_key(passphrase, 16)
             ct_hex = twofish.alg.encrypt(tf_key, plaintext)
-            self.twofish_ct.setPlainText(
-                encode_bytes_to_string(bytes.fromhex(ct_hex))
-            )
+            self.twofish_ct.setPlainText(encode_bytes_to_string(bytes.fromhex(ct_hex)))
 
             rc4_key = derive_key(passphrase, 16)
             ct_bytes = rc4.alg.encrypt(rc4_key, plaintext)

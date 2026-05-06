@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QMessageBox
 from .....helpers.key_derivation import DEFAULT_PLAINTEXT
-from .....helpers.content_tab import ContentTab
-from .....helpers.form_builder import FormBuilder
+from .....base.content_tab import ContentTab
+from .....forms import FormBuilder
 from app.encoding import (
     encode_bytes_to_string,
     decode_string_to_bytes,

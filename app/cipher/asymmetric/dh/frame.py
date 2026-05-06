@@ -1,4 +1,4 @@
-from ....helpers.content_tab import TabbedFrame
+from ....base.content_tab import TabbedFrame
 from .frames.params_gen import ParamsGenTab
 from .frames.key_gen import KeyGenTab
 from .frames.agreement import AgreementTab
