@@ -1,6 +1,10 @@
 from PyQt5.QtWidgets import QMessageBox
 from .....helpers.content_tab import ContentTab
 from .....helpers.form_builder import FormBuilder
+from app.encoding import (
+    encode_bytes_to_string,
+    decode_string_to_bytes,
+)
 from .. import alg
 
 
@@ -110,8 +114,12 @@ class AgreementTab(ContentTab):
 
             if alice_raw == bob_raw and alice_derived == bob_derived:
                 self.compute_status.setText("Valid")
-                getattr(self, "raw_secret_widget").setPlainText(alice_raw.hex())
-                getattr(self, "derived_secret_widget").setPlainText(alice_derived.hex())
+                getattr(self, "raw_secret_widget").setPlainText(
+                    encode_bytes_to_string(alice_raw)
+                )
+                getattr(self, "derived_secret_widget").setPlainText(
+                    encode_bytes_to_string(alice_derived)
+                )
             else:
                 self.compute_status.setText("Invalid - secrets do not match")
                 getattr(self, "raw_secret_widget").setPlainText("")

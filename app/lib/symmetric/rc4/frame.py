@@ -2,6 +2,10 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QMessageBox
 from ....helpers.form_builder import FormBuilder
 from ....helpers.key_derivation import derive_key, DEFAULT_PASSPHRASE, DEFAULT_PLAINTEXT
 from . import alg
+from app.encoding import (
+    encode_bytes_to_string,
+    decode_string_to_bytes,
+)
 
 
 class Frame(QWidget):
@@ -109,8 +113,8 @@ class Frame(QWidget):
             plain = self.enc_plain.toPlainText()
             ct = alg.encrypt(key, plain)
             self.enc_derived_key.setText(key.hex())
-            self.enc_ct.setText(ct.hex())
-            self.dec_ct.setPlainText(ct.hex())
+            self.enc_ct.setText(encode_bytes_to_string(ct))
+            self.dec_ct.setPlainText(encode_bytes_to_string(ct))
             self.dec_pass.setText(self.enc_pass.text())
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Encryption failed: {e}")
@@ -118,7 +122,7 @@ class Frame(QWidget):
     def _do_decrypt(self):
         try:
             key = derive_key(self.dec_pass.text(), 16)
-            ct = bytes.fromhex(self.dec_ct.toPlainText())
+            ct = decode_string_to_bytes(self.dec_ct.toPlainText())
             pt = alg.decrypt(key, ct)
             self.dec_result.setText(pt)
         except Exception as e:

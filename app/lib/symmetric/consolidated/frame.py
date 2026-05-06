@@ -4,8 +4,12 @@ from .. import aes, blowfish, des, des3, rc4
 from ....helpers.form_builder import FormBuilder
 from ....helpers.key_derivation import derive_key, DEFAULT_PASSPHRASE, DEFAULT_PLAINTEXT
 from .. import twofish
+from app.encoding import (
+    encode_bytes_to_string,
+    decode_string_to_bytes,
+)
 
-SEP = ":"
+SEP = "§"
 
 
 class Frame(QWidget):
@@ -117,26 +121,36 @@ class Frame(QWidget):
 
             des_key = derive_key(passphrase, 8)
             iv, ct = des.alg.encrypt(des_key, plaintext)
-            self.des_ct.setPlainText(f"{iv.hex()}{SEP}{ct.hex()}")
+            self.des_ct.setPlainText(
+                f"{encode_bytes_to_string(iv)}{SEP}{encode_bytes_to_string(ct)}"
+            )
 
             des3_key = derive_key(passphrase, 24)
             iv, ct = des3.alg.encrypt(des3_key, plaintext)
-            self.des3_ct.setPlainText(f"{iv.hex()}{SEP}{ct.hex()}")
+            self.des3_ct.setPlainText(
+                f"{encode_bytes_to_string(iv)}{SEP}{encode_bytes_to_string(ct)}"
+            )
 
             aes_key = derive_key(passphrase, 16)
             nonce, ct, tag = aes.alg.encrypt(aes_key, plaintext)
-            self.aes_ct.setPlainText(f"{nonce.hex()}{SEP}{tag.hex()}{SEP}{ct.hex()}")
+            self.aes_ct.setPlainText(
+                f"{encode_bytes_to_string(nonce)}{SEP}{encode_bytes_to_string(tag)}{SEP}{encode_bytes_to_string(ct)}"
+            )
 
             bf_key = derive_key(passphrase, 16)
             iv, ct = blowfish.alg.encrypt(bf_key, plaintext)
-            self.blowfish_ct.setPlainText(f"{iv.hex()}{SEP}{ct.hex()}")
+            self.blowfish_ct.setPlainText(
+                f"{encode_bytes_to_string(iv)}{SEP}{encode_bytes_to_string(ct)}"
+            )
 
             tf_key = derive_key(passphrase, 16)
             ct_hex = twofish.alg.encrypt(tf_key, plaintext)
-            self.twofish_ct.setPlainText(ct_hex)
+            self.twofish_ct.setPlainText(
+                encode_bytes_to_string(bytes.fromhex(ct_hex))
+            )
 
             rc4_key = derive_key(passphrase, 16)
             ct_bytes = rc4.alg.encrypt(rc4_key, plaintext)
-            self.rc4_ct.setPlainText(ct_bytes.hex())
+            self.rc4_ct.setPlainText(encode_bytes_to_string(ct_bytes))
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Encryption failed: {e}")

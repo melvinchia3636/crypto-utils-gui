@@ -2,10 +2,14 @@ from PyQt5.QtWidgets import QMessageBox
 from .....helpers.key_derivation import DEFAULT_PLAINTEXT
 from .....helpers.content_tab import ContentTab
 from .....helpers.form_builder import FormBuilder
+from app.encoding import (
+    encode_bytes_to_string,
+    decode_string_to_bytes,
+)
 from .. import alg
 
 
-SEP = ":"
+SEP = "§"
 
 
 class AesGcmDemoTab(ContentTab):
@@ -149,10 +153,13 @@ class AesGcmDemoTab(ContentTab):
             alice_priv = alg.import_priv_key(self.alice_enc_priv.toPlainText().strip())
             bob_pub = alg.import_pub_key(self.alice_enc_peer.toPlainText().strip())
             _, derived = alg.compute_shared_secret(alice_priv, bob_pub)
-            getattr(self, "alice_shared_key_widget").setPlainText(derived.hex())
+            getattr(self, "alice_shared_key_widget").setPlainText(
+                encode_bytes_to_string(derived)
+            )
             plain = self.aes_plain.toPlainText()
             nonce, ct, tag = alg.aes_gcm_encrypt(derived, plain)
-            combined = f"{nonce.hex()}{SEP}{tag.hex()}{SEP}{ct.hex()}"
+            enc = current_encoding()
+            combined = f"{encode_bytes_to_string(nonce, enc)}{SEP}{encode_bytes_to_string(tag, enc)}{SEP}{encode_bytes_to_string(ct, enc)}"
             self.aes_combined.setPlainText(combined)
             self.bob_dec_combined.setPlainText(combined)
         except Exception as e:
@@ -163,12 +170,15 @@ class AesGcmDemoTab(ContentTab):
             bob_priv = alg.import_priv_key(self.bob_dec_priv.toPlainText().strip())
             alice_pub = alg.import_pub_key(self.bob_dec_peer.toPlainText().strip())
             _, derived = alg.compute_shared_secret(bob_priv, alice_pub)
-            getattr(self, "bob_shared_key_widget").setPlainText(derived.hex())
+            getattr(self, "bob_shared_key_widget").setPlainText(
+                encode_bytes_to_string(derived)
+            )
+            enc = current_encoding()
             raw = self.bob_dec_combined.toPlainText().strip()
             parts = raw.split(SEP)
-            nonce = bytes.fromhex(parts[0])
-            tag = bytes.fromhex(parts[1])
-            ct = bytes.fromhex(parts[2])
+            nonce = decode_string_to_bytes(parts[0], enc)
+            tag = decode_string_to_bytes(parts[1], enc)
+            ct = decode_string_to_bytes(parts[2], enc)
             pt = alg.aes_gcm_decrypt(derived, nonce, ct, tag)
             self.aes_result.setText(pt)
         except Exception as e:

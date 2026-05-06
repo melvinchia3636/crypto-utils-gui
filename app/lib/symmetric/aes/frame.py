@@ -2,6 +2,10 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QMessageBox
 from ....helpers.form_builder import FormBuilder
 from ....helpers.key_derivation import derive_key, DEFAULT_PASSPHRASE, DEFAULT_PLAINTEXT
 from . import alg
+from app.encoding import (
+    encode_bytes_to_string,
+    decode_string_to_bytes,
+)
 
 SEP = ":"
 
@@ -176,14 +180,14 @@ class Frame(QWidget):
             plain = self.enc_plain.toPlainText()
             nonce, ct, tag = alg.encrypt(key, plain)
             self.enc_derived_key.setText(key.hex())
-            self.enc_nonce.setText(nonce.hex())
-            self.enc_tag.setText(tag.hex())
-            self.enc_ct.setText(ct.hex())
+            self.enc_nonce.setText(encode_bytes_to_string(nonce))
+            self.enc_tag.setText(encode_bytes_to_string(tag))
+            self.enc_ct.setText(encode_bytes_to_string(ct))
             self.enc_combined.setPlainText(
-                f"{nonce.hex()}{SEP}{tag.hex()}{SEP}{ct.hex()}"
+                f"{encode_bytes_to_string(nonce)}{SEP}{encode_bytes_to_string(tag)}{SEP}{encode_bytes_to_string(ct)}"
             )
             self.dec_combined.setPlainText(
-                f"{nonce.hex()}{SEP}{tag.hex()}{SEP}{ct.hex()}"
+                f"{encode_bytes_to_string(nonce)}{SEP}{encode_bytes_to_string(tag)}{SEP}{encode_bytes_to_string(ct)}"
             )
             self.dec_pass.setText(self.enc_pass.text())
         except Exception as e:
@@ -198,9 +202,9 @@ class Frame(QWidget):
                 self.dec_tag.setText(parts[1])
                 self.dec_ct.setPlainText(parts[2])
             key = derive_key(self.dec_pass.text(), 16)
-            nonce = bytes.fromhex(self.dec_nonce.text())
-            tag = bytes.fromhex(self.dec_tag.text())
-            ct = bytes.fromhex(self.dec_ct.toPlainText())
+            nonce = decode_string_to_bytes(self.dec_nonce.text())
+            tag = decode_string_to_bytes(self.dec_tag.text())
+            ct = decode_string_to_bytes(self.dec_ct.toPlainText())
             pt = alg.decrypt(key, nonce, ct, tag)
             self.dec_result.setText(pt)
         except Exception as e:

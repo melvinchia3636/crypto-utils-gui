@@ -2,6 +2,10 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QMessageBox
 from ....helpers.form_builder import FormBuilder
 from ....helpers.key_derivation import derive_key, DEFAULT_PASSPHRASE, DEFAULT_PLAINTEXT
 from . import alg
+from app.encoding import (
+    encode_bytes_to_string,
+    decode_string_to_bytes,
+)
 
 SEP = ":"
 

@@ -3,6 +3,10 @@ from .frames.params_gen import ParamsGenTab
 from .frames.key_gen import KeyGenTab
 from .frames.agreement import AgreementTab
 from .frames.aes_demo import AesGcmDemoTab
+from app.encoding import (
+    encode_bytes_to_string,
+    decode_string_to_bytes,
+)
 
 
 class Frame(TabbedFrame):

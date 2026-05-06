@@ -2,6 +2,10 @@ from PyQt5.QtWidgets import QMessageBox
 from .....helpers.key_derivation import DEFAULT_PLAINTEXT
 from .....helpers.content_tab import ContentTab
 from .....helpers.form_builder import FormBuilder
+from app.encoding import (
+    encode_bytes_to_string,
+    decode_string_to_bytes,
+)
 from .. import alg
 
 
@@ -116,7 +120,9 @@ class SignVerifyTab(ContentTab):
             passphrase = self.sign_pass.text().strip() or None
             msg = self.sign_msg.toPlainText()
             sig = alg.sign(priv_pem, msg, passphrase)
-            getattr(self, "sign_sig_widget").setPlainText(sig.hex())
+            getattr(self, "sign_sig_widget").setPlainText(
+                encode_bytes_to_string(sig)
+            )
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Signing failed: {e}")
 
@@ -124,7 +130,9 @@ class SignVerifyTab(ContentTab):
         try:
             pub_pem = self.verify_pubkey.toPlainText().strip()
             msg = self.verify_msg.toPlainText()
-            sig = bytes.fromhex(self.verify_sig.toPlainText())
+            sig = decode_string_to_bytes(
+                self.verify_sig.toPlainText()()
+            )
             ok = alg.verify(pub_pem, msg, sig)
             self.verify_result.setText(
                 "Signature valid!" if ok else "Signature invalid!"

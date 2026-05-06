@@ -1,9 +1,13 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QMessageBox
 from ....helpers.form_builder import FormBuilder
 from ....helpers.key_derivation import derive_key, DEFAULT_PASSPHRASE, DEFAULT_PLAINTEXT
+from app.encoding import (
+    encode_bytes_to_string,
+    decode_string_to_bytes,
+)
 from . import alg
 
-SEP = ":"
+SEP = "§"
 
 
 class Frame(QWidget):
@@ -156,10 +160,14 @@ class Frame(QWidget):
             plain = self.enc_plain.toPlainText()
             iv, ct = alg.encrypt(key, plain)
             self.enc_derived_key.setText(key.hex())
-            self.enc_iv.setText(iv.hex())
-            self.enc_ct.setText(ct.hex())
-            self.enc_combined.setPlainText(f"{iv.hex()}{SEP}{ct.hex()}")
-            self.dec_combined.setPlainText(f"{iv.hex()}{SEP}{ct.hex()}")
+            self.enc_iv.setText(encode_bytes_to_string(iv))
+            self.enc_ct.setText(encode_bytes_to_string(ct))
+            self.enc_combined.setPlainText(
+                f"{encode_bytes_to_string(iv)}{SEP}{encode_bytes_to_string(ct)}"
+            )
+            self.dec_combined.setPlainText(
+                f"{encode_bytes_to_string(iv)}{SEP}{encode_bytes_to_string(ct)}"
+            )
             self.dec_pass.setText(self.enc_pass.text())
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Encryption failed: {e}")
@@ -172,8 +180,8 @@ class Frame(QWidget):
                 self.dec_iv.setText(parts[0])
                 self.dec_ct.setPlainText(parts[1])
             key = derive_key(self.dec_pass.text(), 8)
-            iv = bytes.fromhex(self.dec_iv.text())
-            ct = bytes.fromhex(self.dec_ct.toPlainText())
+            iv = decode_string_to_bytes(self.dec_iv.text())
+            ct = decode_string_to_bytes(self.dec_ct.toPlainText())
             pt = alg.decrypt(key, iv, ct)
             self.dec_result.setText(pt)
         except Exception as e:
