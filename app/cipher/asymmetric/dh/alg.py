@@ -25,6 +25,7 @@ def params_from_pem(pem: str) -> dh.DHParameters:
 def generate_keypair(params: dh.DHParameters) -> tuple[str, str]:
     priv = params.generate_private_key()
     pub = priv.public_key()
+
     return export_pub_key(pub), export_priv_key(priv)
 
 
@@ -59,6 +60,7 @@ def compute_shared_secret(priv, pub) -> tuple[bytes, bytes]:
         salt=None,
         info=b"dh-key-agreement",
     ).derive(shared)
+
     return shared, derived
 
 
@@ -66,9 +68,11 @@ def aes_gcm_encrypt(key: bytes, plaintext: str) -> tuple[bytes, bytes, bytes]:
     nonce = get_random_bytes(12)
     cipher = AES_Cipher.new(key, AES_Cipher.MODE_GCM, nonce=nonce)
     ct, tag = cipher.encrypt_and_digest(plaintext.encode())
+
     return nonce, ct, tag
 
 
 def aes_gcm_decrypt(key: bytes, nonce: bytes, ciphertext: bytes, tag: bytes) -> str:
     cipher = AES_Cipher.new(key, AES_Cipher.MODE_GCM, nonce=nonce)
+
     return cipher.decrypt_and_verify(ciphertext, tag).decode()

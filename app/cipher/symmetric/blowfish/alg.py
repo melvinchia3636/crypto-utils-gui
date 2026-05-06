@@ -7,9 +7,11 @@ def encrypt(key: bytes, plaintext: str) -> tuple[bytes, bytes]:
     iv = get_random_bytes(8)
     cipher = Blowfish.new(key, Blowfish.MODE_CBC, iv=iv)
     ct = cipher.encrypt(pad(plaintext.encode(), 8))
+
     return iv, ct
 
 
 def decrypt(key: bytes, iv: bytes, ciphertext: bytes) -> str:
     cipher = Blowfish.new(key, Blowfish.MODE_CBC, iv=iv)
+
     return unpad(cipher.decrypt(ciphertext), 8).decode()

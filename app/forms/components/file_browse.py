@@ -11,8 +11,10 @@ class Component(FormComponent):
         container = QWidget()
         hbox = QHBoxLayout(container)
         hbox.setContentsMargins(0, 0, 0, 0)
+
         entry = QLineEdit()
         hbox.addWidget(entry)
+
         browse = QPushButton("Browse...")
         dialog_title = cfg.get("dialog_title", "Select file")
         browse.clicked.connect(
@@ -21,5 +23,7 @@ class Component(FormComponent):
             )
         )
         hbox.addWidget(browse)
+
         setattr(cfg["target"], cfg["attr"], entry)
+
         layout.addWidget(container, *row_col(cfg))

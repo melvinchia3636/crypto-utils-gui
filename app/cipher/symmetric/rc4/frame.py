@@ -13,6 +13,7 @@ from . import alg
 class Frame(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
+
         self.setLayout(QVBoxLayout(self))
         self.layout().setContentsMargins(0, 0, 0, 0)
 
@@ -119,6 +120,7 @@ class Frame(QWidget):
             self.enc_ct.setText(encode_bytes_to_string(ct))
             self.dec_ct.setPlainText(encode_bytes_to_string(ct))
             self.dec_pass.setText(self.enc_pass.text())
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Encryption failed: {e}")
 
@@ -128,5 +130,6 @@ class Frame(QWidget):
             ct = decode_string_to_bytes(self.dec_ct.toPlainText())
             pt = alg.decrypt(key, ct)
             self.dec_result.setText(pt)
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Decryption failed: {e}")

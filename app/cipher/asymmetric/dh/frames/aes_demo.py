@@ -16,6 +16,7 @@ SEP = "§"
 class AesGcmDemoTab(ContentTab):
     def __init__(self, parent=None):
         super().__init__(parent)
+
         self._layout.setContentsMargins(16, 16, 16, 16)
 
         alice_side = [
@@ -145,6 +146,7 @@ class AesGcmDemoTab(ContentTab):
                 "readonly": True,
             },
         ]
+
         FormBuilder.build_multi_sections(
             self, [("Alice Encrypts", alice_side), ("Bob Decrypts", bob_side)]
         )
@@ -157,11 +159,14 @@ class AesGcmDemoTab(ContentTab):
             getattr(self, "alice_shared_key_widget").setPlainText(
                 encode_bytes_to_string(derived)
             )
+
             plain = self.aes_plain.toPlainText()
             nonce, ct, tag = alg.aes_gcm_encrypt(derived, plain)
             combined = f"{encode_bytes_to_string(nonce)}{SEP}{encode_bytes_to_string(tag)}{SEP}{encode_bytes_to_string(ct)}"
+
             self.aes_combined.setPlainText(combined)
             self.bob_dec_combined.setPlainText(combined)
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Encryption failed: {e}")
 
@@ -173,12 +178,15 @@ class AesGcmDemoTab(ContentTab):
             getattr(self, "bob_shared_key_widget").setPlainText(
                 encode_bytes_to_string(derived)
             )
+
             raw = self.bob_dec_combined.toPlainText().strip()
             parts = raw.split(SEP)
             nonce = decode_string_to_bytes(parts[0])
             tag = decode_string_to_bytes(parts[1])
             ct = decode_string_to_bytes(parts[2])
             pt = alg.aes_gcm_decrypt(derived, nonce, ct, tag)
+
             self.aes_result.setText(pt)
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Decryption failed: {e}")

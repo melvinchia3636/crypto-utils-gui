@@ -8,6 +8,7 @@ from .. import alg
 class KeyGenTab(ContentTab):
     def __init__(self, parent=None):
         super().__init__(parent)
+
         self._layout.setContentsMargins(16, 16, 16, 16)
 
         params_config = [
@@ -108,5 +109,6 @@ class KeyGenTab(ContentTab):
             aes_tab.alice_enc_peer.setPlainText(alg.export_pub_key(bob_pub))
             aes_tab.bob_dec_priv.setPlainText(alg.export_priv_key(bob_priv))
             aes_tab.bob_dec_peer.setPlainText(alg.export_pub_key(alice_pub))
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Key generation failed: {e}")

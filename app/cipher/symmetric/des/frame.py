@@ -15,6 +15,7 @@ SEP = "§"
 class Frame(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
+
         self.setLayout(QVBoxLayout(self))
         self.layout().setContentsMargins(0, 0, 0, 0)
 
@@ -153,6 +154,7 @@ class Frame(QWidget):
                 "readonly": True,
             },
         ]
+
         FormBuilder.build_multi_sections(
             self, [("Encryption", encrypt_config), ("Decryption", decrypt_config)]
         )
@@ -162,6 +164,7 @@ class Frame(QWidget):
             key = derive_key(self.enc_pass.text(), 8)
             plain = self.enc_plain.toPlainText()
             iv, ct = alg.encrypt(key, plain)
+
             self.enc_derived_key.setText(key.hex())
             self.enc_iv.setText(encode_bytes_to_string(iv))
             self.enc_ct.setText(encode_bytes_to_string(ct))
@@ -172,6 +175,7 @@ class Frame(QWidget):
                 f"{encode_bytes_to_string(iv)}{SEP}{encode_bytes_to_string(ct)}"
             )
             self.dec_pass.setText(self.enc_pass.text())
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Encryption failed: {e}")
 
@@ -182,10 +186,12 @@ class Frame(QWidget):
                 parts = raw.split(SEP)
                 self.dec_iv.setText(parts[0])
                 self.dec_ct.setPlainText(parts[1])
+
             key = derive_key(self.dec_pass.text(), 8)
             iv = decode_string_to_bytes(self.dec_iv.text())
             ct = decode_string_to_bytes(self.dec_ct.toPlainText())
             pt = alg.decrypt(key, iv, ct)
             self.dec_result.setText(pt)
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Decryption failed: {e}")

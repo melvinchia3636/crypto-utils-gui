@@ -25,6 +25,7 @@ def _elgamal_import_priv(t, data):
 class KeyGenTab(ContentTab):
     def __init__(self, parent=None):
         super().__init__(parent, use_grid=True)
+
         config = [
             {"kind": "label", "row": 0, "col": 0, "text": "Key size (bits):"},
             {
@@ -116,7 +117,9 @@ class KeyGenTab(ContentTab):
                 "readonly": True,
             },
         ]
+
         FormBuilder.build_single_section(self._grid, config)
+
         self._layout.addStretch()
 
     def _do_keygen(self):
@@ -124,12 +127,14 @@ class KeyGenTab(ContentTab):
             size = int(self.kg_size)
             pub, priv = alg.generate_keypair(size)
             self._set_keys(pub, priv)
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Key generation failed: {e}")
 
     def _set_keys(self, pub, priv):
         getattr(self, "kg_pub_widget").setPlainText(pub)
         getattr(self, "kg_priv_widget").setPlainText(priv)
+
         self.pub_export_data = pub
         self.priv_export_data = priv
         self.pub_import_data = pub

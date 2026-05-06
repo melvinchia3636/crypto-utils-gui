@@ -10,15 +10,21 @@ class Base58Encoder(Encoder):
         num = int.from_bytes(data, "big")
         if num == 0:
             return _BASE58[0]
+
         chars = []
+
         while num > 0:
             num, rem = divmod(num, 58)
             chars.append(_BASE58[rem])
+
         return "".join(reversed(chars))
 
     def decode(self, text: str) -> bytes:
         num = 0
+
         for c in text.strip():
             num = num * 58 + _BASE58.index(c)
+
         byte_len = (num.bit_length() + 7) // 8
+
         return num.to_bytes(byte_len, "big")

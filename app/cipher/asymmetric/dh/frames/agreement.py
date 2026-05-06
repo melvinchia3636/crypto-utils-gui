@@ -10,6 +10,7 @@ from .. import alg
 class AgreementTab(ContentTab):
     def __init__(self, parent=None):
         super().__init__(parent)
+
         self._layout.setContentsMargins(16, 16, 16, 16)
 
         alice_config = [
@@ -123,6 +124,7 @@ class AgreementTab(ContentTab):
                 self.compute_status.setText("Invalid - secrets do not match")
                 getattr(self, "raw_secret_widget").setPlainText("")
                 getattr(self, "derived_secret_widget").setPlainText("")
+
         except Exception:
             self.compute_status.setText("Error")
             getattr(self, "raw_secret_widget").setPlainText("")

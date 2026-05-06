@@ -14,7 +14,9 @@ from .. import alg
 class SignVerifyTab(ContentTab):
     def __init__(self, parent=None):
         super().__init__(parent)
+
         self._layout.setContentsMargins(16, 16, 16, 16)
+
         sign_config = [
             {"kind": "label", "row": 0, "col": 0, "text": "Private key (PEM):"},
             {
@@ -112,6 +114,7 @@ class SignVerifyTab(ContentTab):
                 "readonly": True,
             },
         ]
+
         FormBuilder.build_multi_sections(
             self, [("Sign", sign_config), ("Verify", verify_config)]
         )
@@ -122,7 +125,9 @@ class SignVerifyTab(ContentTab):
             passphrase = self.sign_pass.text().strip() or None
             msg = self.sign_msg.toPlainText()
             sig = alg.sign(priv_pem, msg, passphrase)
+
             getattr(self, "sign_sig_widget").setPlainText(encode_bytes_to_string(sig))
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Signing failed: {e}")
 
@@ -132,8 +137,10 @@ class SignVerifyTab(ContentTab):
             msg = self.verify_msg.toPlainText()
             sig = decode_string_to_bytes(self.verify_sig.toPlainText()())
             ok = alg.verify(pub_pem, msg, sig)
+
             self.verify_result.setText(
                 "Signature valid!" if ok else "Signature invalid!"
             )
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Verification failed: {e}")

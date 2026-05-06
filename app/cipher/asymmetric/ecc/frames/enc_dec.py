@@ -14,7 +14,9 @@ from .. import alg
 class EncryptDecryptTab(ContentTab):
     def __init__(self, parent=None):
         super().__init__(parent)
+
         self._layout.setContentsMargins(16, 16, 16, 16)
+
         enc_config = [
             {
                 "kind": "label",
@@ -99,6 +101,7 @@ class EncryptDecryptTab(ContentTab):
                 "readonly": True,
             },
         ]
+
         FormBuilder.build_multi_sections(
             self, [("Encrypt", enc_config), ("Decrypt", dec_config)]
         )
@@ -108,7 +111,9 @@ class EncryptDecryptTab(ContentTab):
             pub_pem = self.enc_pubkey.toPlainText().strip()
             plain = self.enc_plain.toPlainText()
             data = alg.encrypt(pub_pem, plain)
+
             getattr(self, "enc_ct_widget").setPlainText(encode_bytes_to_string(data))
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Encryption failed: {e}")
 
@@ -117,6 +122,8 @@ class EncryptDecryptTab(ContentTab):
             priv_pem = self.dec_privkey.toPlainText().strip()
             data = decode_string_to_bytes(self.dec_ct.toPlainText())
             pt = alg.decrypt(priv_pem, data)
+
             self.dec_result.setText(pt)
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Decryption failed: {e}")

@@ -15,6 +15,7 @@ SEP = "§"
 class Frame(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
+
         self.setLayout(QVBoxLayout(self))
         self.layout().setContentsMargins(0, 0, 0, 0)
 
@@ -173,6 +174,7 @@ class Frame(QWidget):
                 "readonly": True,
             },
         ]
+
         FormBuilder.build_multi_sections(
             self, [("Encryption", encrypt_config), ("Decryption", decrypt_config)]
         )
@@ -182,6 +184,7 @@ class Frame(QWidget):
             key = derive_key(self.enc_pass.text(), 16)
             plain = self.enc_plain.toPlainText()
             nonce, ct, tag = alg.encrypt(key, plain)
+
             self.enc_derived_key.setText(key.hex())
             self.enc_nonce.setText(encode_bytes_to_string(nonce))
             self.enc_tag.setText(encode_bytes_to_string(tag))
@@ -193,6 +196,7 @@ class Frame(QWidget):
                 f"{encode_bytes_to_string(nonce)}{SEP}{encode_bytes_to_string(tag)}{SEP}{encode_bytes_to_string(ct)}"
             )
             self.dec_pass.setText(self.enc_pass.text())
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Encryption failed: {e}")
 
@@ -204,11 +208,13 @@ class Frame(QWidget):
                 self.dec_nonce.setText(parts[0])
                 self.dec_tag.setText(parts[1])
                 self.dec_ct.setPlainText(parts[2])
+
             key = derive_key(self.dec_pass.text(), 16)
             nonce = decode_string_to_bytes(self.dec_nonce.text())
             tag = decode_string_to_bytes(self.dec_tag.text())
             ct = decode_string_to_bytes(self.dec_ct.toPlainText())
             pt = alg.decrypt(key, nonce, ct, tag)
             self.dec_result.setText(pt)
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Decryption failed: {e}")

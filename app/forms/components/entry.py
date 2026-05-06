@@ -9,10 +9,14 @@ class Component(FormComponent):
 
     def build(self, layout, cfg):
         w = QLineEdit()
+
         if cfg.get("default"):
             w.setText(cfg["default"])
+
         if cfg.get("readonly", False):
             w.setReadOnly(True)
             setattr(cfg["target"], f"{cfg['attr']}_widget", w)
+
         setattr(cfg["target"], cfg["attr"], w)
+
         layout.addWidget(w, *row_col(cfg))

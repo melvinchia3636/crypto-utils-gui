@@ -46,8 +46,10 @@ class MorseEncoder(Encoder):
 
     def encode(self, data: bytes) -> str:
         s = data.hex()
+
         return " ".join(_MORSE.get(c, "?") for c in s)
 
     def decode(self, text: str) -> bytes:
         hex_str = "".join(_REV_MORSE.get(m, "00") for m in text.strip().split())
+
         return bytes.fromhex(hex_str)

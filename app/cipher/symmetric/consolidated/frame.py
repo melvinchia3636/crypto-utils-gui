@@ -14,8 +14,10 @@ SEP = "§"
 class Frame(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
+
         layout = QVBoxLayout(self)
         layout.setContentsMargins(16, 16, 16, 16)
+
         gl = QGridLayout()
         layout.addLayout(gl)
         config = [
@@ -110,7 +112,9 @@ class Frame(QWidget):
                 "readonly": True,
             },
         ]
+
         FormBuilder.build_single_section(gl, config)
+
         layout.addStretch()
 
     def _do_encrypt_all(self):
@@ -149,5 +153,6 @@ class Frame(QWidget):
             rc4_key = derive_key(passphrase, 16)
             ct_bytes = rc4.alg.encrypt(rc4_key, plaintext)
             self.rc4_ct.setPlainText(encode_bytes_to_string(ct_bytes))
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Encryption failed: {e}")

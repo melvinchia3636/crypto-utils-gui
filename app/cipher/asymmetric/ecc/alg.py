@@ -12,6 +12,7 @@ def generate_keypair(curve: str = "P-256") -> tuple[str, str]:
     key = ECC.generate(curve=_CURVE_MAP[curve])
     pub = key.public_key().export_key(format="PEM")
     priv = key.export_key(format="PEM")
+
     return pub, priv
 
 
@@ -26,6 +27,7 @@ def encrypt(pub_pem: str, plaintext: str) -> bytes:
     ct, tag = cipher.encrypt_and_digest(plaintext.encode())
     eph_pub = eph_key.public_key().export_key(format="PEM")
     result = eph_pub.encode() + b"\n---ECCSEP---\n" + nonce + tag + ct
+
     return result
 
 
@@ -43,6 +45,7 @@ def decrypt(priv_pem: str, data: bytes) -> str:
     shared_secret = SHA256.new(shared_point.x.to_bytes(_CURVE_BYTES[privkey.curve]))
     aes_key = shared_secret.digest()[:16]
     cipher = AES.new(aes_key, AES.MODE_GCM, nonce=nonce)
+
     return cipher.decrypt_and_verify(ct, tag).decode()
 
 
@@ -50,6 +53,7 @@ def sign(priv_pem: str, message: str) -> bytes:
     privkey = ECC.import_key(priv_pem)
     h = SHA256.new(message.encode())
     signer = DSS.new(privkey, "fips-186-3")
+
     return signer.sign(h)
 
 
@@ -57,8 +61,10 @@ def verify(pub_pem: str, message: str, signature: bytes) -> bool:
     pubkey = ECC.import_key(pub_pem)
     h = SHA256.new(message.encode())
     verifier = DSS.new(pubkey, "fips-186-3")
+
     try:
         verifier.verify(h, signature)
         return True
+
     except ValueError:
         return False

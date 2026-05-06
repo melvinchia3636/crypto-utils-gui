@@ -11,4 +11,5 @@ class EmojiEncoder(Encoder):
 
     def decode(self, text: str) -> bytes:
         rev = {v: k for k, v in enumerate(_EMOJI_TABLE)}
+
         return bytes(rev[c] for c in text.strip())

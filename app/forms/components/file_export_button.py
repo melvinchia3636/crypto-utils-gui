@@ -20,15 +20,20 @@ class Component(FormComponent):
             data = getattr(target, attr, "")
             if not data:
                 return
+
             try:
                 path = QFileDialog.getSaveFileName(target, title, def_name, filt)[0]
                 if not path:
                     return
+
                 open(path, "w").write(data)
+
                 if on_export:
                     on_export(target, data)
+
             except Exception as e:
                 QMessageBox.critical(target, "Export Error", f"Failed to export: {e}")
 
         btn.clicked.connect(_do_export)
+
         layout.addWidget(btn, *row_col(cfg))

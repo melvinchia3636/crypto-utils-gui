@@ -8,6 +8,7 @@ from .. import alg
 class ParamsGenTab(ContentTab):
     def __init__(self, parent=None):
         super().__init__(parent, use_grid=True)
+
         config = [
             {"kind": "label", "row": 0, "col": 0, "text": "Key size:"},
             {
@@ -39,7 +40,9 @@ class ParamsGenTab(ContentTab):
                 "readonly": True,
             },
         ]
+
         FormBuilder.build_single_section(self._grid, config)
+
         self._layout.addStretch()
 
     def _do_gen_params(self):
@@ -47,7 +50,9 @@ class ParamsGenTab(ContentTab):
             size = int(self.params_size)
             params = alg.generate_params(size)
             pem = alg.params_to_pem(params)
+
             getattr(self, "params_pem_widget").setPlainText(pem)
             self._parent_frame._tabs.widget(1).kg_params.setPlainText(pem)
+
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Parameter generation failed: {e}")

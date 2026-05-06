@@ -18,15 +18,20 @@ class Component(FormComponent):
 
         def _do_import():
             path = QFileDialog.getOpenFileName(target, title, def_name, filt)[0]
+
             if not path:
                 return
+
             try:
                 data = open(path).read()
                 setattr(target, attr, data)
+
                 if on_import:
                     on_import(target, data)
+
             except Exception as e:
                 QMessageBox.critical(target, "Import Error", f"Failed to import: {e}")
 
         btn.clicked.connect(_do_import)
+
         layout.addWidget(btn, *row_col(cfg))

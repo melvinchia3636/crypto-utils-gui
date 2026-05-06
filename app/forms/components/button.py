@@ -10,4 +10,5 @@ class Component(FormComponent):
     def build(self, layout, cfg):
         btn = QPushButton(cfg["text"])
         btn.clicked.connect(cfg["command"])
+
         layout.addWidget(btn, *row_col(cfg))

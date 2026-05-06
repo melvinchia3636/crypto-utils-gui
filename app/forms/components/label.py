@@ -10,4 +10,5 @@ class Component(FormComponent):
 
     def build(self, layout, cfg):
         lbl = QtLabel(cfg["text"])
+
         layout.addWidget(lbl, *row_col(cfg), Qt.AlignTop)
