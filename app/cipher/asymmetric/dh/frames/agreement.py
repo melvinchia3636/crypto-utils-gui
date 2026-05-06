@@ -1,10 +1,9 @@
-from PyQt5.QtWidgets import QMessageBox
-from .....base.content_tab import ContentTab
-from .....forms import FormBuilder
 from app.encoding import (
     encode_bytes_to_string,
-    decode_string_to_bytes,
 )
+
+from .....base.content_tab import ContentTab
+from .....forms import FormBuilder
 from .. import alg
 
 
@@ -124,7 +123,7 @@ class AgreementTab(ContentTab):
                 self.compute_status.setText("Invalid - secrets do not match")
                 getattr(self, "raw_secret_widget").setPlainText("")
                 getattr(self, "derived_secret_widget").setPlainText("")
-        except Exception as e:
+        except Exception:
             self.compute_status.setText("Error")
             getattr(self, "raw_secret_widget").setPlainText("")
             getattr(self, "derived_secret_widget").setPlainText("")

@@ -1,5 +1,6 @@
+from base64 import b16decode, b16encode
+
 from ...base.encoder import Encoder
-from base64 import b16encode, b16decode
 
 
 class Base16Encoder(Encoder):

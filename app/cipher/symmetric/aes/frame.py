@@ -1,13 +1,15 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QMessageBox
-from ....forms import FormBuilder
-from ....helpers.key_derivation import derive_key, DEFAULT_PASSPHRASE, DEFAULT_PLAINTEXT
-from . import alg
+from PyQt5.QtWidgets import QMessageBox, QVBoxLayout, QWidget
+
 from app.encoding import (
-    encode_bytes_to_string,
     decode_string_to_bytes,
+    encode_bytes_to_string,
 )
 
-SEP = ":"
+from ....forms import FormBuilder
+from ....helpers.key_derivation import DEFAULT_PASSPHRASE, DEFAULT_PLAINTEXT, derive_key
+from . import alg
+
+SEP = "§"
 
 
 class Frame(QWidget):

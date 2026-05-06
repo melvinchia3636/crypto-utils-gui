@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QLineEdit
+
 from ...base.form_component import FormComponent
 from ..utils.builder_utils import row_col
 

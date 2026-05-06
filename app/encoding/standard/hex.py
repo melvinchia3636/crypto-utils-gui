@@ -1,5 +1,5 @@
+
 from ...base.encoder import Encoder
-from base64 import b64encode, b64decode
 
 
 class HexEncoder(Encoder):

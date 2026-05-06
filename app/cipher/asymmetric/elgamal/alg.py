@@ -1,10 +1,10 @@
-from Crypto.PublicKey import ElGamal as _ElGamal
-from Crypto import Random
-from Crypto.Hash import SHA256
-from Crypto.Random import get_random_bytes
-from Crypto.Cipher import AES
-from base64 import b64encode, b64decode
+from base64 import b64decode, b64encode
 
+from Crypto import Random
+from Crypto.Cipher import AES
+from Crypto.Hash import SHA256
+from Crypto.PublicKey import ElGamal as _ElGamal
+from Crypto.Random import get_random_bytes
 
 KEY_SIZES = ["256", "512", "1024", "2048"]
 

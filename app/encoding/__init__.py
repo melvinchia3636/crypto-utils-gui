@@ -1,7 +1,6 @@
-from . import standard, fun
 from ..base.encoder import Encoder
 from ..helpers.discover_modules import discover_modules
-
+from . import fun, standard
 
 ENCODERS = discover_modules(
     standard, Encoder, init_fn=lambda i: setattr(i, "group", "Standard")

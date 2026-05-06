@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QPushButton
+from PyQt5.QtWidgets import QHBoxLayout, QPushButton, QWidget
+
 from ...base.form_component import FormComponent
 from ..utils.builder_utils import row_col
 

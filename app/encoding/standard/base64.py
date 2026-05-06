@@ -1,5 +1,6 @@
+from base64 import b64decode, b64encode
+
 from ...base.encoder import Encoder
-from base64 import b64encode, b64decode
 
 
 class Base64Encoder(Encoder):

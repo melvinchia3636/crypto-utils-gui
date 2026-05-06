@@ -1,6 +1,8 @@
 import os
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QMessageBox
+
 from Crypto.Random import get_random_bytes
+from PyQt5.QtWidgets import QMessageBox, QVBoxLayout, QWidget
+
 from ....forms import FormBuilder
 from . import alg
 

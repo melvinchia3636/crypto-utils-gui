@@ -1,5 +1,6 @@
-from PyQt5.QtWidgets import QLabel as QtLabel
 from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QLabel as QtLabel
+
 from ...base.form_component import FormComponent
 from ..utils.builder_utils import row_col
 

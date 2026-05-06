@@ -1,4 +1,5 @@
 from PyQt5.QtWidgets import QFrame, QGridLayout, QLabel
+
 from .components import BUILDERS
 
 

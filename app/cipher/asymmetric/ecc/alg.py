@@ -1,9 +1,8 @@
-from Crypto.PublicKey import ECC
 from Crypto.Cipher import AES
-from Crypto.Random import get_random_bytes
 from Crypto.Hash import SHA256
+from Crypto.PublicKey import ECC
+from Crypto.Random import get_random_bytes
 from Crypto.Signature import DSS
-
 
 _CURVE_BYTES = {"NIST P-256": 32, "NIST P-384": 48, "NIST P-521": 66}
 _CURVE_MAP = {"P-256": "NIST P-256", "P-384": "NIST P-384", "P-521": "NIST P-521"}

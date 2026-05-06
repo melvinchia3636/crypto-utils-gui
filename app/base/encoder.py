@@ -18,7 +18,7 @@ class Encoder:
     @staticmethod
     def current() -> str:
         for w in QApplication.topLevelWidgets():
-            if hasattr(w, "encoding_combo"):
-                text = w.encoding_combo.currentText().strip()
+            if hasattr(w, "encoding_selector"):
+                text = w.encoding_selector.combo.currentText().strip()
                 return text.split(" (")[0] if " (" in text else text
         return "Hex"

@@ -1,13 +1,14 @@
 from PyQt5.QtWidgets import QMessageBox
-from .....helpers.key_derivation import DEFAULT_PLAINTEXT
+
+from app.encoding import (
+    decode_string_to_bytes,
+    encode_bytes_to_string,
+)
+
 from .....base.content_tab import ContentTab
 from .....forms import FormBuilder
-from app.encoding import (
-    encode_bytes_to_string,
-    decode_string_to_bytes,
-)
+from .....helpers.key_derivation import DEFAULT_PLAINTEXT
 from .. import alg
-
 
 SEP = "§"
 
@@ -158,8 +159,7 @@ class AesGcmDemoTab(ContentTab):
             )
             plain = self.aes_plain.toPlainText()
             nonce, ct, tag = alg.aes_gcm_encrypt(derived, plain)
-            enc = current_encoding()
-            combined = f"{encode_bytes_to_string(nonce, enc)}{SEP}{encode_bytes_to_string(tag, enc)}{SEP}{encode_bytes_to_string(ct, enc)}"
+            combined = f"{encode_bytes_to_string(nonce)}{SEP}{encode_bytes_to_string(tag)}{SEP}{encode_bytes_to_string(ct)}"
             self.aes_combined.setPlainText(combined)
             self.bob_dec_combined.setPlainText(combined)
         except Exception as e:
@@ -173,12 +173,11 @@ class AesGcmDemoTab(ContentTab):
             getattr(self, "bob_shared_key_widget").setPlainText(
                 encode_bytes_to_string(derived)
             )
-            enc = current_encoding()
             raw = self.bob_dec_combined.toPlainText().strip()
             parts = raw.split(SEP)
-            nonce = decode_string_to_bytes(parts[0], enc)
-            tag = decode_string_to_bytes(parts[1], enc)
-            ct = decode_string_to_bytes(parts[2], enc)
+            nonce = decode_string_to_bytes(parts[0])
+            tag = decode_string_to_bytes(parts[1])
+            ct = decode_string_to_bytes(parts[2])
             pt = alg.aes_gcm_decrypt(derived, nonce, ct, tag)
             self.aes_result.setText(pt)
         except Exception as e:

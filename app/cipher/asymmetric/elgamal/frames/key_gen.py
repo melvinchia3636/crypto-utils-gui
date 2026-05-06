@@ -1,8 +1,8 @@
 from PyQt5.QtWidgets import QMessageBox
+
 from .....base.content_tab import ContentTab
 from .....forms import FormBuilder
 from .. import alg
-
 
 KEY_SIZES = alg.KEY_SIZES
 

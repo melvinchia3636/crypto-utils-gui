@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QPushButton, QFileDialog, QMessageBox
+from PyQt5.QtWidgets import QFileDialog, QMessageBox, QPushButton
+
 from ...base.form_component import FormComponent
 from ..utils.builder_utils import row_col
 

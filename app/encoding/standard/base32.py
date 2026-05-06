@@ -1,5 +1,6 @@
+from base64 import b32decode, b32encode
+
 from ...base.encoder import Encoder
-from base64 import b32encode, b32decode
 
 
 class Base32Encoder(Encoder):

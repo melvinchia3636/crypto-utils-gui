@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QGridLayout, QTabWidget
+from PyQt5.QtWidgets import QGridLayout, QTabWidget, QVBoxLayout, QWidget
 
 
 class ContentTab(QWidget):

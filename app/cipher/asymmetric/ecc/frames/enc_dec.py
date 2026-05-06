@@ -1,11 +1,13 @@
 from PyQt5.QtWidgets import QMessageBox
-from .....helpers.key_derivation import DEFAULT_PLAINTEXT
+
+from app.encoding import (
+    decode_string_to_bytes,
+    encode_bytes_to_string,
+)
+
 from .....base.content_tab import ContentTab
 from .....forms import FormBuilder
-from app.encoding import (
-    encode_bytes_to_string,
-    decode_string_to_bytes,
-)
+from .....helpers.key_derivation import DEFAULT_PLAINTEXT
 from .. import alg
 
 

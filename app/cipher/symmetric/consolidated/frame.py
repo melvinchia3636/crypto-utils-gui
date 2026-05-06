@@ -1,13 +1,12 @@
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QGridLayout, QMessageBox
+from PyQt5.QtWidgets import QGridLayout, QMessageBox, QVBoxLayout, QWidget
 
-from .. import aes, blowfish, des, des3, rc4
-from ....forms import FormBuilder
-from ....helpers.key_derivation import derive_key, DEFAULT_PASSPHRASE, DEFAULT_PLAINTEXT
-from .. import twofish
 from app.encoding import (
     encode_bytes_to_string,
-    decode_string_to_bytes,
 )
+
+from ....forms import FormBuilder
+from ....helpers.key_derivation import DEFAULT_PASSPHRASE, DEFAULT_PLAINTEXT, derive_key
+from .. import aes, blowfish, des, des3, rc4, twofish
 
 SEP = "§"
 

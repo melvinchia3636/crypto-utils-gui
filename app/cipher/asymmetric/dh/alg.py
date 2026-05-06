@@ -1,9 +1,8 @@
-from cryptography.hazmat.primitives.asymmetric import dh
-from cryptography.hazmat.primitives import serialization, hashes
-from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 from Crypto.Cipher import AES as AES_Cipher
 from Crypto.Random import get_random_bytes
-
+from cryptography.hazmat.primitives import hashes, serialization
+from cryptography.hazmat.primitives.asymmetric import dh
+from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 
 KEY_SIZES = ["2048", "3072", "4096"]
 
