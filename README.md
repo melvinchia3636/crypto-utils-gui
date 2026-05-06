@@ -23,6 +23,17 @@ The last time I was building GUI application was already like 5 years ago when I
 - **PEM Key Import/Export** - Generate, export, and import PEM-encoded keys (public and private) for all asymmetric algorithms
 - **Autofill Flow** - Generated keys are automatically propagated across related tabs (e.g., key generation auto-fills into encryption/decryption and signing/verification tabs)
 
+## 🖥 Screenshots
+
+<div>
+  <img width="49%" alt="image" src="https://github.com/user-attachments/assets/722058aa-f5ca-4fc6-9eb7-b7f6818de375" />
+  <img width="49%" alt="image" src="https://github.com/user-attachments/assets/58776425-3596-44cb-b043-cda58c37fe94" />
+  <img width="49%" alt="image" src="https://github.com/user-attachments/assets/eef0b859-9539-4e57-abab-ef572b0e72b1" />
+  <img width="49%" alt="image" src="https://github.com/user-attachments/assets/dab91a21-058e-488f-958d-a58d03b2433a" />
+  <img width="49%" alt="image" src="https://github.com/user-attachments/assets/8a22cc88-6824-4390-a900-e5efe1966476" />
+  <img width="49%" alt="image" src="https://github.com/user-attachments/assets/79a3fb8e-3034-41eb-baa6-9ac6956a8662" />
+</div>
+
 ## 🔬 Technologies Used
 
 ![skills](https://img.shields.io/badge/-PYTHON-FF0000?style=for-the-badge&logo=python&logoColor=white&color=3776AB)
