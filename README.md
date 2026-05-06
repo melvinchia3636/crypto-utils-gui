@@ -51,6 +51,7 @@ The last time I was building a GUI application was already like 5 years ago, whe
 
 - Python 3.12+
 - Crypto++ (for Twofish support)
+- uv (Pls don't use default pip, it's slow af lol)
 
 ### Building the Twofish Native Module
 
@@ -98,8 +99,8 @@ The build process for Windows is not documented here. You will need `cryptopp` a
 ### Installation
 
 ```bash
-cd cryptofun
-python3 -m venv .venv
+cd crypto-utils-gui
+uv venv
 source .venv/bin/activate
 uv pip install -r requirements.txt
 ```
@@ -113,7 +114,7 @@ python3 main.py
 
 ## 🧪 Running Tests
 
-Cryptofun includes inline verification tests embedded throughout the development process. All algorithms can be tested by running the app and performing encrypt/decrypt roundtrips on any algorithm tab.
+This project Utils GUI includes inline verification tests embedded throughout the development process. All algorithms can be tested by running the app and performing encrypt/decrypt roundtrips on any algorithm tab.
 
 ## 🏗 Project Structure
 
@@ -143,7 +144,7 @@ app/
 
 ## 🔌 Architecture
 
-Cryptofun uses a **dynamic module discovery** pattern:
+This project uses a **dynamic module discovery** pattern:
 
 - **Ciphers** export a `CipherFrame` instance from their `__init__.py`
 - **Encodings** export an `Encoder` subclass with `encode`/`decode` methods
