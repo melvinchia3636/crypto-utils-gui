@@ -7,6 +7,6 @@ from .frames.sign_verify import SignVerifyTab
 class Frame(TabbedFrame):
     tab_specs = [
         (KeyGenTab, "Key Generation"),
-        (EncryptDecryptTab, "Encryption / Decryption"),
-        (SignVerifyTab, "Signing / Verification"),
+        (EncryptDecryptTab, "Encryption / Decryption (ECDH)"),
+        (SignVerifyTab, "Signing / Verification (ECDSA)"),
     ]
