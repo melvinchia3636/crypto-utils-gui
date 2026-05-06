@@ -9,8 +9,8 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtCore import Qt
-from .lib.symmetric.symmetric_frame import SymmetricWidget
-from .lib.asymmetric.asymmetric_frame import AsymmetricWidget
+from .cipher.symmetric.symmetric_frame import SymmetricWidget
+from .cipher.asymmetric.asymmetric_frame import AsymmetricWidget
 from .encoding import ENCODERS
 import sys
 
@@ -46,7 +46,9 @@ class App(QWidget):
                 _add_group(self.encoding_combo, model, group_label, items)
         self.encoding_combo.setModel(model)
         hex_enc = next(e for e in ENCODERS if e.name.lower() == "hex")
-        self.encoding_combo.setCurrentText(f"  {hex_enc.name} ({hex_enc.get_example()})")
+        self.encoding_combo.setCurrentText(
+            f"  {hex_enc.name} ({hex_enc.get_example()})"
+        )
         top_bar.addWidget(self.encoding_combo, 1)
         layout.addLayout(top_bar)
         tabs = QTabWidget()
