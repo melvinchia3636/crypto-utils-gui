@@ -1,6 +1,6 @@
 <center><h1 align="center">🔐 Crypto Utils</h1></center>
 
-<p align="center">A desktop cryptography utility built with PyQt5</p>
+<p align="center">A desktop cryptography explorer built with PyQt5</p>
 
 ## 🤔 The Problem (Not Really)
 
@@ -12,7 +12,7 @@ Just then, my dear lecturer found the little GUI app I built for a demonstration
 
 So yeah, here we go. A PyQt5 desktop application that compiles a decently comprehensive collection of cryptographic algorithms into a relatively clean interface. I've built the codebase to be quite decently declarative and modular (like I usually do lol) btw, so if in the future a new cipher method is to be added, it will be pretty simple.
 
-The last time I was building GUI application was already like 5 years ago when I was still a teen playing around with TKinter (yup, very legacy I know, but somehow I managed to master that library). Picking it back up (but this time using PyQt5) wasn't that difficult anyway, some references and documentations were more than enough.
+The last time I was building a GUI application was already like 5 years ago, when I was still a teen playing around with TKinter (yup, very legacy, I know, but somehow I managed to master that library). Picking it back up (but this time using PyQt5) wasn't that difficult anyway; some references and documentation were more than enough.
 
 ## ✨ Features
 
