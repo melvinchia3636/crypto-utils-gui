@@ -7,10 +7,8 @@ from app.encoding import (
 
 from .....base.content_tab import ContentTab
 from .....forms import FormBuilder
-from .....helpers.key_derivation import DEFAULT_PLAINTEXT
+from .....helpers.key_derivation import DEFAULT_PLAINTEXT, SEP
 from .. import alg
-
-SEP = "§"
 
 
 class AesGcmDemoTab(ContentTab):

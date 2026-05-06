@@ -5,10 +5,13 @@ from app.encoding import (
 )
 
 from ....forms import FormBuilder
-from ....helpers.key_derivation import DEFAULT_PASSPHRASE, DEFAULT_PLAINTEXT, derive_key
+from ....helpers.key_derivation import (
+    DEFAULT_PASSPHRASE,
+    DEFAULT_PLAINTEXT,
+    derive_key,
+    SEP,
+)
 from .. import aes, blowfish, des, des3, rc4, twofish
-
-SEP = "§"
 
 
 class Frame(QWidget):

@@ -1,6 +1,7 @@
 from Crypto.Hash import SHA256
 from Crypto.Protocol.KDF import PBKDF2
 
+SEP = "§"
 DEFAULT_PASSPHRASE = "aVerySecretPassword@123"
 DEFAULT_PLAINTEXT = "Hello World!\nThis text will be {actioned} by {cipher}.\nabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;':\",./<>?~`"
 

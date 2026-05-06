@@ -6,10 +6,13 @@ from app.encoding import (
 )
 
 from ....forms import FormBuilder
-from ....helpers.key_derivation import DEFAULT_PASSPHRASE, DEFAULT_PLAINTEXT, derive_key
+from ....helpers.key_derivation import (
+    DEFAULT_PASSPHRASE,
+    DEFAULT_PLAINTEXT,
+    derive_key,
+    SEP,
+)
 from . import alg
-
-SEP = "§"
 
 
 class Frame(QWidget):

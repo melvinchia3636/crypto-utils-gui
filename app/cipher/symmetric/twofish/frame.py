@@ -3,10 +3,12 @@ from PyQt5.QtWidgets import QMessageBox, QVBoxLayout, QWidget
 from app.encoding import decode_string_to_bytes, encode_bytes_to_string
 
 from ....forms import FormBuilder
-from ....helpers.key_derivation import DEFAULT_PASSPHRASE, DEFAULT_PLAINTEXT, derive_key
+from ....helpers.key_derivation import (
+    DEFAULT_PASSPHRASE,
+    DEFAULT_PLAINTEXT,
+    derive_key,
+)
 from . import alg
-
-SEP = "§"
 
 
 class Frame(QWidget):

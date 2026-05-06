@@ -13,7 +13,7 @@ class Base128Encoder(Encoder):
         result = []
 
         for i in range(0, len(bits), 7):
-            chunk = bits[i:i + 7].ljust(7, "0")
+            chunk = bits[i : i + 7].ljust(7, "0")
             result.append(_BASE128[int(chunk, 2)])
 
         return "".join(result)
@@ -24,7 +24,7 @@ class Base128Encoder(Encoder):
         result = []
 
         for i in range(0, len(bits), 8):
-            chunk = bits[i:i + 8]
+            chunk = bits[i : i + 8]
             if len(chunk) < 8:
                 break
             result.append(int(chunk, 2))
