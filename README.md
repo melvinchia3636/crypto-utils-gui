@@ -19,7 +19,7 @@ The last time I was building a GUI application was already like 5 years ago, whe
 - **Symmetric Ciphers** - DES, 3DES, AES (GCM mode), Blowfish, Twofish, RC4, plus a consolidated view that encrypts with all algorithms at once
 - **Asymmetric Cryptography** - RSA (OAEP encryption + PSS signing), ECC (ECDH + ECDSA), ElGamal, and Diffie-Hellman key agreement
 - **Passphrase-Based Key Derivation** - No need to manage raw hex keys; enter a passphrase and a PBKDF2-derived key is used internally, with the derived key displayed for transparency
-- **15+ Fun Encodings (100% Just for fun lol)** - View ciphertext as hex, base64, emoji, braille, runes, mathematical symbols, mahjong tiles, alchemy symbols, morse code, bars, binary, octal, and more - all switchable live from the encoding selector
+- **100+ Encodings (99% just for fun lol)** - View ciphertext as hex, base64, emoji, braille, runes, genetic sequences, ZWJ person sequences, alchemy symbols, morse code, zalgo text, quantum superposition glyphs, geometric shapes, cuneiform, gothic script, Cyrillic, Ogham, Phaistos Disk symbols, skin-toned person emoji, zero-width encoded steganography, and many more - all switchable live from the encoding selector
 - **PEM Key Import/Export** - Generate, export, and import PEM-encoded keys (public and private) for all asymmetric algorithms
 - **Autofill Flow** - Generated keys are automatically propagated across related tabs (e.g., key generation auto-fills into encryption/decryption and signing/verification tabs)
 
@@ -162,10 +162,13 @@ This project uses a **dynamic module discovery** pattern:
 
 | Group | Encodings |
 |-------|-----------|
-| **Standard** | Hex, Base64, Base32, Base58, Base16 |
-| **Fun** | Emoji, Bars, Braille, Runes, Math Symbols, Mahjong Tiles, Alchemy Symbols, Binary, Octal, Morse Code, Base 128 |
+| **Standard** (~10) | Hex, Base64, Base32, Base58, Base85, Base36, Base91, Base65536, ROT13, ROT47, Percent Encoding |
+| **Fun** (~53) | Binary, Octal, Morse, Morse Visual, Zalgo, Genetic (DNA), Compass (NESW), Shapes, Weather, Gears, Traffic, Candy, Cat, CellPhone, Zero Width, Circles, Arrows, Box, Bars, Brackets, Brainfuck, Checkmarks, Chemistry, Chess, Dice, Fractions, Greek, Hitler, Mac, Mahjong, Math Ops, Music, Playback, Punctuation, Roman, Script, Set Theory, Shades, Stars, Units, and more |
+| **Emoji** (~17) | Animals, Astrology, Birds, Clocks, Face, Flags, Food, Gestures, Hearts, Instruments, Keycaps, Office, Plants, Sea Life, Space, Sports, Transport, Circles |
+| **Languages** (~22) | Braille, Chinese, Cuneiform, Cyrillic, Deseret, Diacritics, Duployan, Ethiopic, Glagolitic, Gothic, Hieroglyph, Hiragana, IPA, Katakana, Korean, Latin-1, Ogham, Runes, Shavian, Super/Sub, Tamil, Thai |
+| **Quantum** (~3) | Quantum (superposition of 203 Unicode variants per nibble), Skin Tone (5,760 ZWJ person sequences at 12 bits/emoji), Variation (256 Unicode variation selectors behind a single █) |
 
-Feel free to add more.
+> **100+ encodings total.** Add one by dropping a 10-line `.py` file into the right `app/encoding/*/` folder — auto-discovery picks it up instantly.
 
 ## 📈 Status
 
