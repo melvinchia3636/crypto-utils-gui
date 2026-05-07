@@ -1,0 +1,15 @@
+from ...base.encoder import Encoder
+
+from .bits import bits_chunk_encode, bits_chunk_decode
+
+_PLAYBACK = ["◀", "▶", "⏸", "⏹", "⏺", "⏭", "⏯", "⏏"]
+
+
+class PlaybackEncoder(Encoder):
+    name = "Playback"
+
+    def encode(self, data: bytes) -> str:
+        return bits_chunk_encode(data, _PLAYBACK, 3)
+
+    def decode(self, text: str) -> bytes:
+        return bits_chunk_decode(text, _PLAYBACK, 3)

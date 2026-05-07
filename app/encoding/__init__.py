@@ -1,10 +1,15 @@
 from ..base.encoder import Encoder
 from ..helpers.discover_modules import discover_modules
-from . import fun, standard
+from . import emojis, fun, languages, standard
 
-ENCODERS = discover_modules(
-    standard, Encoder, init_fn=lambda i: setattr(i, "group", "Standard")
-) + discover_modules(fun, Encoder, init_fn=lambda i: setattr(i, "group", "Fun"))
+ENCODERS = (
+    discover_modules(
+        standard, Encoder, init_fn=lambda i: setattr(i, "group", "Standard")
+    )
+    + discover_modules(fun, Encoder, init_fn=lambda i: setattr(i, "group", "Fun"))
+    + discover_modules(emojis, Encoder, init_fn=lambda i: setattr(i, "group", "Emoji"))
+    + discover_modules(languages, Encoder, init_fn=lambda i: setattr(i, "group", "Languages"))
+)
 ENCODER_MAP = {e.name.lower(): e for e in ENCODERS}
 
 

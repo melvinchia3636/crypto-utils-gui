@@ -1,13 +1,7 @@
 from PyQt5.QtWidgets import QTabWidget, QVBoxLayout, QWidget
 
-from .cipher import asymmetric, symmetric
-from .forms.encoding_selector import EncodingSelector
-from .helpers.algorithm_browser import AlgorithmBrowser
-
-TABS = [
-    (symmetric, "Cipher Methods"),
-    (asymmetric, "Algorithms"),
-]
+from .cipher import CipheringTab
+from .cracking import CrackingTab
 
 
 class App(QWidget):
@@ -18,16 +12,8 @@ class App(QWidget):
         self.resize(1000, 700)
 
         layout = QVBoxLayout(self)
-        tabs = QTabWidget(self)
 
-        [
-            tabs.addTab(
-                AlgorithmBrowser.make_browser(pkg, lbl),
-                pkg.__name__.split(".")[-1].capitalize(),
-            )
-            for (pkg, lbl) in TABS
-        ]
-
-        self.encoding_selector = EncodingSelector()
-        layout.addWidget(self.encoding_selector)
-        layout.addWidget(tabs)
+        root_tabs = QTabWidget(self)
+        root_tabs.addTab(CipheringTab(self), "Ciphering")
+        root_tabs.addTab(CrackingTab(self), "Cracking")
+        layout.addWidget(root_tabs)

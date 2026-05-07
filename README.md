@@ -19,7 +19,7 @@ The last time I was building a GUI application was already like 5 years ago, whe
 - **Symmetric Ciphers** - DES, 3DES, AES (GCM mode), Blowfish, Twofish, RC4, plus a consolidated view that encrypts with all algorithms at once
 - **Asymmetric Cryptography** - RSA (OAEP encryption + PSS signing), ECC (ECDH + ECDSA), ElGamal, and Diffie-Hellman key agreement
 - **Passphrase-Based Key Derivation** - No need to manage raw hex keys; enter a passphrase and a PBKDF2-derived key is used internally, with the derived key displayed for transparency
-- **15+ Fun Encodings (100% Just for fun lol)** - View ciphertext as hex, base64, emoji, braille, runes, mathematical symbols, mahjong tiles, alchemy symbols, morse code, bars, binary, octal, and more — all switchable live from the encoding selector
+- **15+ Fun Encodings (100% Just for fun lol)** - View ciphertext as hex, base64, emoji, braille, runes, mathematical symbols, mahjong tiles, alchemy symbols, morse code, bars, binary, octal, and more - all switchable live from the encoding selector
 - **PEM Key Import/Export** - Generate, export, and import PEM-encoded keys (public and private) for all asymmetric algorithms
 - **Autofill Flow** - Generated keys are automatically propagated across related tabs (e.g., key generation auto-fills into encryption/decryption and signing/verification tabs)
 
@@ -149,7 +149,7 @@ This project uses a **dynamic module discovery** pattern:
 - **Ciphers** export a `CipherFrame` instance from their `__init__.py`
 - **Encodings** export an `Encoder` subclass with `encode`/`decode` methods
 - **Form components** export a `FormComponent` subclass with a `build` method
-- The `discover_modules()` helper auto-discovers all plugins at startup — no manual registration needed when adding new algorithms
+- The `discover_modules()` helper auto-discovers all plugins at startup - no manual registration needed when adding new algorithms
 
 ## ⌨️ Supported Algorithms
 

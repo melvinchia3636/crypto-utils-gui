@@ -11,4 +11,7 @@ class Component(FormComponent):
         btn = QPushButton(cfg["text"])
         btn.clicked.connect(cfg["command"])
 
+        if "attr" in cfg:
+            setattr(cfg["target"], cfg["attr"], btn)
+
         layout.addWidget(btn, *row_col(cfg))

@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QApplication
 
 class Encoder:
     name = ""
-    _example = b"\x48"
+    _example = b"Hello"
     group = ""
 
     def encode(self, data: bytes) -> str:
